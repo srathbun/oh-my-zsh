@@ -77,9 +77,9 @@ function +vi-hg-storerev() {
 function +vi-hg-branchhead() {
     local currentRev headRev headRevId extraInfo
 	extraInfo=""
-	headRevs=$(hg heads `hg id -i` | grep changeset | cut -f 3 -d ':' | wc -l)
-	headRevId=$(hg heads `hg id -i` | grep changeset | cut -f 3 -d ':' | head -1)
-	currentRev=$(hg id -i)
+	currentRev=$(hg id -i | sed 's/+//')
+	headRevs=$(hg heads $currentRev  | grep changeset | cut -f 3 -d ':' | wc -l)
+	headRevId=$(hg heads $currentRev | grep changeset | cut -f 3 -d ':' | head -1)
 
 	if let "$headRevs > 1" ; then
 		extraInfo="${extraInfo}*"
