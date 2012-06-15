@@ -57,11 +57,12 @@ zstyle ':vcs_info:hg:*' branchformat '%b'
 zstyle ':vcs_info:hg:*' hgrevformat '%r'
 
 # debug?
-zstyle ':vcs_info:*+*:*' debug false
+# zstyle ':vcs_info:*+*:*' debug true
+
 # hooks
 # currently hg-storerev and hg-branchhead do not work
-# zstyle ':vcs_info:hg*+set-message:*' hooks hg-storerev hg-branchhead 
-zstyle ':vcs_info:hg*+set-message:*' hooks mq-vcs
+# hg-storerev 
+zstyle ':vcs_info:hg*+set-message:*' hooks mq-vcs hg-branchhead
 zstyle ':vcs_info:git*+set-message:*' hooks git-st git-stash git-untracked
 
 
@@ -74,23 +75,19 @@ function +vi-hg-storerev() {
 ### Show marker when the working directory is not on a branch head
 # This may indicate that running `hg up` will do something
 function +vi-hg-branchhead() {
-    local branchheadsfile i_tiphash i_branchname
-    local -a branchheads
+    local currentRev headRev headRevId extraInfo
+	extraInfo=""
+	headRevs=$(hg heads `hg id -i` | grep changeset | cut -f 3 -d ':' | wc -l)
+	headRevId=$(hg heads `hg id -i` | grep changeset | cut -f 3 -d ':' | head -1)
+	currentRev=$(hg id -i)
 
-    local branchheadsfile=${hook_com[base]}/.hg/branchheads.cache
+	if let "$headRevs > 1" ; then
+		extraInfo="${extraInfo}*"
+	fi
 
-    # Bail out if any mq patches are applied
-    [[ -s ${hook_com[base]}/.hg/patches/status ]] && return 0
-
-    if [[ -r ${branchheadsfile} ]] ; then
-        while read -r i_tiphash i_branchname ; do
-            branchheads+=( $i_tiphash )
-        done < ${branchheadsfile}
-
-        if [[ ! ${branchheads[(i)${user_data[hash]}]} -le ${#branchheads} ]] ; then
-            hook_com[revision]="${c4}%F{9}^%f${c2}${hook_com[revision]}"
-        fi
-    fi
+	if [[ $currentRev != $headRevId ]] ; then
+		hook_com[revision]="%F{9}${extraInfo}^%f${hook_com[revision]}"
+	fi
 }
 
 ### Show when mq itself is under version control
@@ -162,14 +159,14 @@ LOCATION='in %{$fg_bold[blue]%}${PWD/#$HOME/~}%{$reset_color%}'
 function check_make () {
 	make -q &>/dev/null
 	if [ $? -eq 1 ]; then
-		echo -ne "!"
+		echo -ne "! "
 	fi
 }
 
 # Use a % for normal users and a # for privelaged (root) users.
 USER_PRIV="%(!.%{$fg_bold[red]%}#.%{$fg_bold[blue]%}%%)%{$reset_color%}"
 # status indicators for various things
-ADDITIONAL_INFO="[ %F{11}\$(check_make)%f ]"
+ADDITIONAL_INFO="[ %F{11}\$(check_make)%f]"
 
 #REPOS='$(hg_prompt_info_with_color)$(git_prompt_info)'
 REPOS='${vcs_info_msg_0_}'
