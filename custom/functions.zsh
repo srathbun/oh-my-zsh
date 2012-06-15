@@ -12,11 +12,8 @@ netinfo ()
 {
 echo "--------------- Network Information ---------------"
 ifconfig | awk /'inet addr/ {print $2}'
-echo ""
 ifconfig | awk /'Bcast/ {print $3}'
-echo ""
 ifconfig | awk /'inet addr/ {print $4}'
-echo ""
 ifconfig | awk /'HWaddr/ {print $4,$5}'
 echo "---------------------------------------------------"
 }
