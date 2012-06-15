@@ -144,8 +144,6 @@ function +vi-git-untracked() {
 	fi
 }
 
-
-
 # get vcs_info to collect informations
 precmd () { 
 	vcs_info
