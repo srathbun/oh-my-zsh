@@ -10,6 +10,8 @@
 #zstyle ':completion:*' substitute 1
 #zstyle :compinstall filename '/home/srathbun/.oh-my-zsh/custom/complete.zsh'
 
+# completion directory
+fpath=($ZSH/zsh-completions $fpath)
 # select first entry in menucompletion
 # setopt menucomplete
 ### If you want zsh's completion to pick up new commands in $path automatically
