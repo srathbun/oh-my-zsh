@@ -49,3 +49,6 @@ zstyle ':completion:*:*:*:*:processes' menu yes select
 zstyle ':completion:*:*:*:*:processes' force-list always
 zstyle ':completion:*:processes-names' command  'ps c -u ${USER} -o command | uniq'
 
+#gnuutils=$(find / -mount -maxdepth 3 -type f -perm /a+x -path '*bin*' 2>/dev/null | sed -r -e 's;.*/(.+)$;\1;' | tr '\n' ' ')
+#export gnuutils
+#compdef _gnu_generic "${gnuutils}"
