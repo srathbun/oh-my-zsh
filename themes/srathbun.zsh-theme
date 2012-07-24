@@ -62,7 +62,7 @@ zstyle ':vcs_info:hg:*' hgrevformat '%r'
 # hooks
 # currently hg-storerev and hg-branchhead do not work
 # hg-storerev 
-zstyle ':vcs_info:hg*+set-message:*' hooks mq-vcs hg-branchhead
+zstyle ':vcs_info:hg*+set-message:*' hooks mq-vcs hg-branchhead hg-st
 zstyle ':vcs_info:git*+set-message:*' hooks git-st git-stash git-untracked
 
 
@@ -87,6 +87,25 @@ function +vi-hg-branchhead() {
 
 	if [[ $currentRev != $headRevId ]] ; then
 		hook_com[revision]="%F{9}${extraInfo}^%f${hook_com[revision]}"
+	fi
+}
+
+# Show remote ref name and number of commits ahead-of or behind
+function +vi-hg-st() {
+	local ahead behind remote
+	local -a hgstatus
+
+	# Are we on a remote-tracking branch?
+	remote=${$(hg paths | cut -f 1 -d '=')}
+
+	if [[ -n ${remote} ]] ; then
+		ahead=$(hg out 2>/dev/null | grep 'changeset' | wc -l)
+		(( $ahead )) && hgstatus+=( "%F{11}+${ahead}%f" )
+
+		behind=$(hg in 2>/dev/null | grep 'changeset' | wc -l)
+		(( $behind )) && hgstatus+=( "%F{9}-${behind}%f" )
+
+		hook_com[branch]="${hook_com[branch]}%u %F{8}[%F{88}${remote} %f${(j:/:)hgstatus}%F{8}]%f"
 	fi
 }
 
