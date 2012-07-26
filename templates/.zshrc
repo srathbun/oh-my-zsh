@@ -40,6 +40,21 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern root)
 
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
 
+# To differentiate aliases from other command types
+ZSH_HIGHLIGHT_STYLES[alias]='fg=magenta,bold'
+
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=yellow'
+
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[function]='fg=white'
+
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=cyan'
+
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=magenta'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=magenta'
+
+#ZSH_HIGHLIGHT_STYLES[assign]=none
 
 # Customize to your needs...
 export PATH=/home/srathbun/.local/bin:/home/srathbun/.local/bin:/home/srathbun/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:
