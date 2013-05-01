@@ -31,7 +31,7 @@ alias zshconfig="vim $ZSH/custom/"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # zsh-syntax-highlighting plugin must be last in list
-plugins=(git github git-flow mercurial pip python compleat command-not-found cpanm debian dircycle dirpersist django extract heroku perl rvm zsh-syntax-highlighting)
+plugins=(git github git-flow mercurial pip python compleat cpanm debian dircycle dirpersist django extract heroku perl rvm zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -57,19 +57,21 @@ ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=magenta'
 #ZSH_HIGHLIGHT_STYLES[assign]=none
 
 # Customize to your needs...
-export PATH=/home/srathbun/.local/bin:/home/srathbun/.local/bin:/home/srathbun/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:
+export PATH=/Users/srathbun/.local/bin:/Users/srathbun/.local/bin:/Users/srathbun/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/share/npm/bin:
 
+export BYOBU_PREFIX=$(brew --prefix)
 export EDITOR="vim"
+source ~/.profile # sources the doctorjs profile info, to set it up
 
 # WELCOME SCREEN
 #######################################################
 
 echo -ne "${WHITE} USA Linux Users Group ${NC}"; echo "";
 echo -e "Kernel Information: " `uname -smr`;
-echo -e ${LIGHTBLUE}`bash --version`;echo ""
+echo -e ${LIGHTBLUE}`zsh --version`;echo ""
 echo -ne "Hello $USER today is "; date
 echo -e "${WHITE}"; cal ; echo "";
 echo -ne "${CYAN}";netinfo;
 echo -e "${RED}"; tail $ZSH/log/.zsh_history | cut -f 2 -d ';'; echo ""
 echo -e "${CYAN}"; mountedinfo ; echo ""
-echo -ne "${WHITE} http://usalug.org${NC}"; echo ""; fortune -s; echo ""
+echo -ne "${WHITE} http://usalug.org${NC}"; echo ""

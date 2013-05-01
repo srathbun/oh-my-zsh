@@ -26,10 +26,14 @@ zstyle ':vcs_info:(hg*|git*):*' check-for-changes true
 # Used VCS use 
 # %  vcs_info_printsys 
 # for supported systems 
-zstyle ':vcs_info:*' enable git hg
-zstyle ':vcs_info:(hg*|git*):*' get-revision true
+zstyle ':vcs_info:*' enable git hg svn
+zstyle ':vcs_info:(hg*|git*|svn*):*' get-revision true
 zstyle ':vcs_info:hg*:*' get-mq false
 zstyle ':vcs_info:hg*:*' get-bookmarks true
+
+# Default format: [git|master]  
+zstyle ':vcs_info:svn*' formats "%F{8}(%s)[%F{244}%i%u %F{88}%U%b%%u%f %F{18}%m%F{8}]%f"
+zstyle ':vcs_info:svn*' actionformats "%F{8}(%s|%F{9}%a%F{8})[%F{244}%i%F{11}%u %F{88}%U%b%%u%f %F{18}%m%F{8}]%f"
 
 # Default format: [git|master]  
 zstyle ':vcs_info:hg*' formats "%F{8}(%s)[%F{244}%i%u %F{88}%U%b%%u%f %F{18}%m%F{8}]%f"

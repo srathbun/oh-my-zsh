@@ -1,5 +1,5 @@
 # aliases for zsh
-alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
+alias man=" TERMINFO=~/.terminfo/ LESS=C PAGER=less man"
 
 # Some example alias instructions
 # If these are enabled they will be used instead of any instructions
@@ -8,7 +8,7 @@ alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
 # \rm will call the real rm not the alias.
 
 # see the usage of a command in history
-alias hist="history | grep $1" #Requires one input
+alias hist=" history | grep $1" #Requires one input
 
 # ALIAS TO REMOTE SERVERS
 alias h91502="ssh 192.168.1.43"
@@ -52,7 +52,7 @@ alias df="df -h"
 alias du="du -h"
 
 # Misc :)
-alias less="less -r"                          # raw control characters
+alias less="less -R"                          # raw control characters
 alias whence="type -a"                        # where, of a sort
 alias grep="grep -r --color"                  # show differences in colour
 alias diff="diff -ayw --suppress-common-lines" # suppress common lines, ignore whitespace and output in column format
@@ -60,21 +60,22 @@ alias ports="netstat -tulpn"
 alias update="apt-get update && apt-get upgrade"
 
 # Some shortcuts for different directory listings
-alias ..="cd .."
-alias prev="cd -"
-alias ls="ls -XhF --color=tty"                 # classify files in colour
-alias dir="ls --color=auto --format=vertical"
-alias vdir="ls --color=auto --format=long"
-alias ll="ls -l"                              # long list
-alias la="ls -Al"                             # all but . and ..
-alias l="ls -CF"                              #
-alias lx="ls -lXB"        			  # sort by extension
-alias lk="ls -lSr"            			  # sort by size
-alias lc="ls -lcr"			      # sort by change time
-alias lu="ls -lur"     			  # sort by access time
-alias lr="ls -lR"              			  # recursive ls
-alias lt="ls -ltr"             			  # sort by date
-alias lm="ls -al |more"        			  # pipe through "more"
+alias ..=" cd .."
+alias cd=" cd"
+alias prev=" cd -"
+alias ls=" ls -h -F -G"                 # classify files in colour
+alias dir=" ls --color=auto --format=vertical"
+alias vdir=" ls --color=auto --format=long"
+alias ll=" ls -l"                              # long list
+alias la=" ls -Al"                             # all but . and ..
+alias l=" ls -CF"                              #
+alias lx=" ls -lXB"        			  # sort by extension
+alias lk=" ls -lSr"            			  # sort by size
+alias lc=" ls -lcr"			      # sort by change time
+alias lu=" ls -lur"     			  # sort by access time
+alias lr=" ls -lR"              			  # recursive ls
+alias lt=" ls -ltr"             			  # sort by date
+alias lm=" ls -al |more"        			  # pipe through "more"
 
 # this may be deprecated
 # alias ls="/bin/ls -F --color=tty --show-control-chars"	# color and show control chars

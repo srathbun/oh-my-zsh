@@ -27,6 +27,21 @@ function include_d {
 	fi
 }
 
+function runTest() {
+	local CWD=$PWD
+	while true; do
+		if [ -d node_modules ]; then
+			break
+		fi
+		if [ $PWD == '/' ]; then
+			echo "Could not find node_modules directory!"
+			break
+		fi
+		cd ..
+	done
+	./node_modules/mocha/bin/mocha --ui exports --reporter spec --recursive $1
+	cd $CWD
+}
 #include_d bash_functions
 #include_d bash_aliases
 #include_d bash_completion
