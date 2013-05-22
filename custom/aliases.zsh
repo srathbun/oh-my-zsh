@@ -101,3 +101,10 @@ alias nytimes="lynx -term=vt100 http://nytimes.com"
 alias dmregister="lynx -term=vt100 http://desmoinesregister.com"
 
 alias spell="echo $@ | aspell -a list"
+
+# vim without plugins
+alias vi="vim -u NONE -N"
+
+# ssh aliases
+alias sshdev="ssh -i ~/.ssh/devBoxes dev.e6.rcg.local"
+alias sshprod="ssh -i ~/.ssh/devBoxes prod.e6.rcg.local"
