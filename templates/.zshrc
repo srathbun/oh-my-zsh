@@ -31,7 +31,7 @@ alias zshconfig="vim $ZSH/custom/"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # zsh-syntax-highlighting plugin must be last in list
-plugins=(git github git-flow mercurial pip python compleat cpanm debian dircycle dirpersist django extract heroku perl rvm zsh-syntax-highlighting)
+plugins=(git github git-flow mercurial npm pip python compleat cpanm debian dircycle dirpersist django extract heroku perl rvm zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -62,6 +62,12 @@ export PATH=/Users/srathbun/.local/bin:/Users/srathbun/.local/bin:/Users/srathbu
 export BYOBU_PREFIX=$(brew --prefix)
 export EDITOR="vim"
 source ~/.profile # sources the doctorjs profile info, to set it up
+
+# disable nodeenv path change, since it conflicts with prompt
+export NODE_VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# add cscope db
+CSCOPE_DB=~/cscope/cscope.out; export CSCOPE_DB
 
 # WELCOME SCREEN
 #######################################################

@@ -187,7 +187,7 @@ function check_make () {
 # Use a % for normal users and a # for privelaged (root) users.
 USER_PRIV="%(!.%{$fg_bold[red]%}#.%{$fg_bold[blue]%}%%)%{$reset_color%}"
 # status indicators for various things
-ADDITIONAL_INFO="[ %F{11}\$(check_make)%f]"
+ADDITIONAL_INFO="[ \$(virtualenv_info) \$(nodeenv_info) %F{11}\$(check_make)%f]"
 
 #REPOS='$(hg_prompt_info_with_color)$(git_prompt_info)'
 REPOS='${vcs_info_msg_0_}'
@@ -196,10 +196,14 @@ function virtualenv_info {
 	    [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
 }
 
+function nodeenv_info {
+	    [ $NODE_VIRTUAL_ENV ] && echo '('`basename $NODE_VIRTUAL_ENV`') '
+}
+
 PROMPT="
 $NET_LOCATION $LOCATION
 $REPOS
-$(virtualenv_info)$ADDITIONAL_INFO$USER_PRIV "
+$ADDITIONAL_INFO$USER_PRIV "
 
 # Use %_ to show why you are in a continued prompt
 # Expansion prompt for multiline commands
