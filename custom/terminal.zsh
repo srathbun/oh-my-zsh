@@ -1,5 +1,5 @@
 # terminal setup for zsh
-export TERM="xterm-256color"
+#export TERM="xterm-256color"
 
 # Color Variables
 # ###############

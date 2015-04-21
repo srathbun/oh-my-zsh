@@ -31,7 +31,8 @@ alias zshconfig="vim $ZSH/custom/"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # zsh-syntax-highlighting plugin must be last in list
-plugins=(git github git-flow mercurial npm pip python compleat cpanm debian dircycle dirpersist django extract heroku perl rvm zsh-syntax-highlighting)
+ZSH_TMUX_AUTOSTART=true
+plugins=(tmux git github git-flow mercurial npm pip python compleat cpanm debian dircycle dirpersist django extract heroku perl zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -57,7 +58,7 @@ ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=magenta'
 #ZSH_HIGHLIGHT_STYLES[assign]=none
 
 # Customize to your needs...
-export PATH=/Users/srathbun/.local/bin:/Users/srathbun/.local/bin:/Users/srathbun/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/share/npm/bin:
+export PATH=/Users/srathbun/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/share/npm/bin:
 
 export BYOBU_PREFIX=$(brew --prefix)
 export EDITOR="vim"
@@ -65,9 +66,15 @@ source ~/.profile # sources the doctorjs profile info, to set it up
 
 # disable nodeenv path change, since it conflicts with prompt
 export NODE_VIRTUAL_ENV_DISABLE_PROMPT=1
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+# use brew python stuff
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
+eval "$(rbenv init -)"
 # add cscope db
-CSCOPE_DB=~/cscope/cscope.out; export CSCOPE_DB
+# CSCOPE_DB=~/cscope/cscope.out; export CSCOPE_DB
+
+source ~/perl5/perlbrew/etc/bashrc
 
 # WELCOME SCREEN
 #######################################################
