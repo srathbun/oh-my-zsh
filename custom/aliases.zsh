@@ -108,3 +108,6 @@ alias vi="vim -u NONE -N"
 # ssh aliases
 alias sshdev="ssh -i ~/.ssh/devBoxes dev.e6.rcg.local"
 alias sshprod="ssh -i ~/.ssh/devBoxes prod.e6.rcg.local"
+
+# tmux with color support
+alias tmux='tmux -2'

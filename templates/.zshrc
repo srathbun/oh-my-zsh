@@ -32,11 +32,13 @@ alias zshconfig="vim $ZSH/custom/"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # zsh-syntax-highlighting plugin must be last in list
 ZSH_TMUX_AUTOSTART=true
-plugins=(tmux git github git-flow mercurial npm pip python compleat cpanm debian dircycle dirpersist django extract heroku perl zsh-syntax-highlighting)
+plugins=(tmux git github git-flow mercurial pip python compleat cpanm debian dircycle dirpersist django extract heroku perl zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
 # active highlighter scripts
+# NOTE: zsh highlighting is a git submodule!
+# initialize it with git submodule init && git submodule update --recursive --rebase --remote
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern root)
 
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
@@ -55,26 +57,26 @@ ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=cyan'
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=magenta'
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=magenta'
 
-#ZSH_HIGHLIGHT_STYLES[assign]=none
+ZSH_HIGHLIGHT_STYLES[assign]=none
 
 # Customize to your needs...
-export PATH=/Users/srathbun/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/share/npm/bin:
+export PATH=/home/srathbun/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/share/npm/bin:
 
-export BYOBU_PREFIX=$(brew --prefix)
+# export BYOBU_PREFIX=$(brew --prefix)
 export EDITOR="vim"
-source ~/.profile # sources the doctorjs profile info, to set it up
+# source ~/.profile # sources the doctorjs profile info, to set it up
 
 # disable nodeenv path change, since it conflicts with prompt
 export NODE_VIRTUAL_ENV_DISABLE_PROMPT=1
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 # use brew python stuff
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+# export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
 # add cscope db
 # CSCOPE_DB=~/cscope/cscope.out; export CSCOPE_DB
 
-source ~/perl5/perlbrew/etc/bashrc
+# source ~/perl5/perlbrew/etc/bashrc
 
 # WELCOME SCREEN
 #######################################################
