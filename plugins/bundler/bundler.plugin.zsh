@@ -1,44 +1,96 @@
+## Aliases
+
+alias ba="bundle add"
+alias bck="bundle check"
+alias bcn="bundle clean"
 alias be="bundle exec"
 alias bi="bundle install"
 alias bl="bundle list"
-alias bp="bundle package"
 alias bo="bundle open"
+alias bout="bundle outdated"
+alias bp="bundle package"
 alias bu="bundle update"
+alias bua="bundle update --all"
 
-# The following is based on https://github.com/gma/bundler-exec
+## Gem wrapper
 
-bundled_commands=(annotate cap capify cucumber foreman guard jekyll middleman nanoc rackup rainbows rake rspec ruby shotgun spec spin spork thin thor unicorn unicorn_rails puma)
+bundled_commands=(
+  annotate
+  cap
+  capify
+  cucumber
+  foodcritic
+  guard
+  hanami
+  irb
+  jekyll
+  kitchen
+  knife
+  middleman
+  nanoc
+  pry
+  puma
+  rackup
+  rainbows
+  rake
+  rspec
+  rubocop
+  shotgun
+  sidekiq
+  spec
+  spork
+  spring
+  strainer
+  tailor
+  taps
+  thin
+  thor
+  unicorn
+  unicorn_rails
+)
 
-## Functions
+# Remove $UNBUNDLED_COMMANDS from the bundled_commands list
+bundled_commands=(${bundled_commands:|UNBUNDLED_COMMANDS})
+unset UNBUNDLED_COMMANDS
 
-_bundler-installed() {
-  which bundle > /dev/null 2>&1
-}
+# Add $BUNDLED_COMMANDS to the bundled_commands list
+bundled_commands+=($BUNDLED_COMMANDS)
+unset BUNDLED_COMMANDS
 
+# Check if in the root or a subdirectory of a bundled project
 _within-bundled-project() {
-  local check_dir=$PWD
-  while [ $check_dir != "/" ]; do
-    [ -f "$check_dir/Gemfile" ] && return
-    check_dir="$(dirname $check_dir)"
+  local check_dir="$PWD"
+  while [[ "$check_dir" != "/" ]]; do
+    if [[ -f "$check_dir/Gemfile" || -f "$check_dir/gems.rb" ]]; then
+      return 0
+    fi
+    check_dir="${check_dir:h}"
   done
-  false
+  return 1
 }
 
 _run-with-bundler() {
-  if _bundler-installed && _within-bundled-project; then
-    bundle exec $@
+  if (( ! $+commands[bundle] )) || ! _within-bundled-project; then
+    "$@"
+    return $?
+  fi
+
+  if [[ -f "./bin/${1}" ]]; then
+    ./bin/${^^@}
   else
-    $@
+    bundle exec "$@"
   fi
 }
 
-## Main program
 for cmd in $bundled_commands; do
-  eval "function unbundled_$cmd () { $cmd \$@ }"
-  eval "function bundled_$cmd () { _run-with-bundler $cmd \$@}"
-  alias $cmd=bundled_$cmd
+  # Create wrappers for bundled and unbundled execution
+  eval "function unbundled_$cmd () { \"$cmd\" \"\$@\"; }"
+  eval "function bundled_$cmd () { _run-with-bundler \"$cmd\" \"\$@\"; }"
+  alias "$cmd"="bundled_$cmd"
 
-  if which _$cmd > /dev/null 2>&1; then
-        compdef _$cmd bundled_$cmd=$cmd
+  # Bind completion function to wrapped gem if available
+  if (( $+functions[_$cmd] )); then
+    compdef "_$cmd" "bundled_$cmd"="$cmd"
   fi
 done
+unset cmd bundled_commands
