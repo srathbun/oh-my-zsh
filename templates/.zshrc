@@ -31,7 +31,7 @@ alias zshconfig="vim $ZSH/custom/"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # zsh-syntax-highlighting plugin must be last in list
-ZSH_TMUX_AUTOSTART=true
+#ZSH_TMUX_AUTOSTART=true
 plugins=(tmux git github git-flow mercurial pip python compleat cpanm debian dircycle dirpersist django extract heroku perl zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
@@ -77,6 +77,10 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 # CSCOPE_DB=~/cscope/cscope.out; export CSCOPE_DB
 
 # source ~/perl5/perlbrew/etc/bashrc
+#
+# Enable pyenv and pyenv-virtualenv
+if which pyenv > /dev/null; then eval "$(pyenv init --path)"; fi
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init - | sed s/precmd/precwd/g)"; fi
 
 # WELCOME SCREEN
 #######################################################
